@@ -23,6 +23,7 @@ $ pip install Folium
 3. Download the Dataset
 
 You can find one [here](https://data.gov.hk/en-data/dataset/hk-td-tis_23-routes-fares-geojson).
+Place it in `data/`.
 
 4. Run the file
 
