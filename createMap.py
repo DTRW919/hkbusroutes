@@ -4,8 +4,7 @@ map = folium.Map(
             prefer_canvas = True,
             tiles = "Cartodb Voyager",
             zoom_start = 12,
-            min_zoom = 10,
-            max_zoom = 20,
+            min_zoom = 11,
             location = [22.345064, 114.190009]
                 )
 
@@ -22,11 +21,12 @@ def plotDot(lat, lon, color, name):
                     tooltip = name
                        ).add_to(map)
 
-def plotLine(lat1, lon1, lat2, lon2, color):
+def plotLine(lat1, lon1, lat2, lon2, color, name):
     folium.PolyLine(
                     locations = [[lat1, lon1], [lat2, lon2]],
                     weight = 2,
-                    color = color
+                    color = color,
+                    tooltip = name
                        ).add_to(map)
 
 def findColor(name):
@@ -63,7 +63,7 @@ for j in range(len(fileObject["features"]) - 1):
             if fileObject["features"][j + 1]["properties"]["stopSeq"] - fileObject["features"][j]["properties"]["stopSeq"] == 1:
 
 
-                plotLine(lat1, lon1, lat2, lon2, findColor(fileObject["features"][j]["properties"]["routeNameE"]))
+                plotLine(lat1, lon1, lat2, lon2, findColor(fileObject["features"][j]["properties"]["routeNameE"]), fileObject["features"][j]["properties"]["routeNameE"])
 
 subfolder = "output"
 filename = "map.html"
