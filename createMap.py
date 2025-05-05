@@ -7,7 +7,6 @@ map = folium.Map(
     min_zoom = 11,
     location = [22.345064, 114.190009]
     )
-folium.LayerControl().add_to(map)
 
 route1 = folium.FeatureGroup(name = "1", show = False).add_to(map)
 route2 = folium.FeatureGroup(name = "2", show = False).add_to(map)
@@ -19,6 +18,8 @@ route7 = folium.FeatureGroup(name = "7", show = False).add_to(map)
 route8 = folium.FeatureGroup(name = "8", show = False).add_to(map)
 route9 = folium.FeatureGroup(name = "9", show = False).add_to(map)
 routeX = folium.FeatureGroup(name = "Other", show = False).add_to(map)
+
+folium.LayerControl().add_to(map)
 
 file = open("data/output.json")
 fileData = file.read()
@@ -73,7 +74,7 @@ def setData(name, type):
             return routeX
     else:
         if type == "color":
-            return colors[int(strippedName[0]) - 1]
+            return colors[int(strippedName[-1]) - 1]
         elif type == "layer":
             return layers[int(strippedName[0]) - 1]
 
