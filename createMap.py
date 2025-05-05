@@ -1,4 +1,4 @@
-import folium, json, re
+import folium, json, os
 
 map = folium.Map(
             prefer_canvas = True,
@@ -65,4 +65,10 @@ for j in range(len(fileObject["features"]) - 1):
 
                 plotLine(lat1, lon1, lat2, lon2, findColor(fileObject["features"][j]["properties"]["routeNameE"]))
 
-map.save("map.html")
+subfolder = "output"
+filename = "map.html"
+full_path = os.path.join(subfolder, filename)
+
+os.makedirs(subfolder, exist_ok = True)
+
+map.save(full_path)
