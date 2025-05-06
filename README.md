@@ -3,7 +3,7 @@
 I wanted to get better at GeoGuessr specfically in HK but rural areas got too confusing.
 Knowing the general location of bus routes across HK can help to narrow down where you are. :)
 
-This code is based off the free data provided by data.gov.hk's bus routes
+This code is based off the free data provided by [data.gov.hk](https://data.gov.hk).
 
 ## Demo
 <img src="data/demo.png" style="text-align: center;" />
@@ -17,7 +17,7 @@ This project uses Python and the Folium module to create an HTML map.
 git clone https://github.com/DTRW919/hkbusroutes.git
 ```
 
-2. Install Folium with Pip
+2. Install Folium with pip
 
 ```bash
 $ pip install Folium
@@ -28,7 +28,7 @@ $ pip install Folium
 You can find one [here](https://data.gov.hk/en-data/dataset/hk-td-tis_23-routes-fares-geojson).
 Place it in `data/output.json`.
 
-4. Run the create file
+4. Run the Create File
 
 ```bash
 python createMap.py
