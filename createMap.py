@@ -8,15 +8,26 @@ map = folium.Map(
     location = [22.345064, 114.190009]
     )
 
-# Tile layer to show world
-tileLayer = folium.TileLayer(
+# Tile layers to show world
+tileLayerLight = folium.TileLayer(
     tiles = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
     attr = "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors &copy; <a href='https://carto.com/attributions'>CARTO</a>",
     min_zoom = 11,
     max_zoom = 16,
-    name = "Cartodb Voyager",
-    control = False # Remove from Layer Control
+    name = "☀️"
 ).add_to(map)
+
+tileLayerDark = folium.TileLayer(
+    tiles = "https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png",
+    attr = "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors &copy; <a href='https://carto.com/attributions'>CARTO</a>",
+    min_zoom = 11,
+    max_zoom = 16,
+    name = "🌙",
+    opacity = 0.9,
+    show = False # Not default
+).add_to(map)
+
+
 
 # Layers to place routes in by first integer value
 routeX = folium.FeatureGroup(name = "0x / Other", show = False).add_to(map)
@@ -43,15 +54,17 @@ def plotLine(lat1, lon1, lat2, lon2, color, name, layer):
     folium.CircleMarker(
         location = [lat1, lon1],
         radius = 2,
-        weight = 1,
-        color = color
+        weight = 1.5,
+        color = color,
+        opacity = 0.75
     ).add_to(layer)
 
     folium.PolyLine(
         locations = [[lat1, lon1], [lat2, lon2]],
         weight = 2,
         color = color,
-        tooltip = name
+        tooltip = name,
+        opacity = 0.65
     ).add_to(layer)
 
 # Return something based on data
