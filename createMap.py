@@ -1,5 +1,6 @@
 import folium, json, os
 
+# Base map
 map = folium.Map(
     prefer_canvas = True,
     tiles = None,
@@ -7,6 +8,17 @@ map = folium.Map(
     location = [22.345064, 114.190009]
     )
 
+# Tile layer to show world
+tileLayer = folium.TileLayer(
+    tiles = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+    attr = "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors &copy; <a href='https://carto.com/attributions'>CARTO</a>",
+    min_zoom = 11,
+    max_zoom = 16,
+    name = "Cartodb Voyager",
+    control = False # Remove from Layer Control
+).add_to(map)
+
+# Layers to place routes in by first integer value
 routeX = folium.FeatureGroup(name = "0x / Other", show = False).add_to(map)
 route1 = folium.FeatureGroup(name = "1x", show = False).add_to(map)
 route2 = folium.FeatureGroup(name = "2x", show = False).add_to(map)
@@ -18,22 +30,15 @@ route7 = folium.FeatureGroup(name = "7x", show = False).add_to(map)
 route8 = folium.FeatureGroup(name = "8x", show = False).add_to(map)
 route9 = folium.FeatureGroup(name = "9x", show = False).add_to(map)
 
-tileLayer = folium.TileLayer(
-    tiles = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
-    attr = "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors &copy; <a href='https://carto.com/attributions'>CARTO</a>",
-    min_zoom = 11,
-    max_zoom = 16,
-    name = "Cartodb Voyager",
-    control = False # Remove from Layer Control
-)
-tileLayer.add_to(map)
-
+# Allow layer manipulation
 folium.LayerControl().add_to(map)
 
+# Create data object
 file = open("data/output.json")
 fileData = file.read()
 fileObject = json.loads(fileData)
 
+# Function to plot lines between 2 points
 def plotLine(lat1, lon1, lat2, lon2, color, name, layer):
     folium.CircleMarker(
         location = [lat1, lon1],
@@ -49,6 +54,7 @@ def plotLine(lat1, lon1, lat2, lon2, color, name, layer):
         tooltip = name
     ).add_to(layer)
 
+# Return something based on data
 def setData(name, type):
     colors = [
         "red",
@@ -88,6 +94,7 @@ def setData(name, type):
         elif type == "layer":
             return layers[int(strippedName[0])]
 
+# Actual usage
 for i in range(len(fileObject["features"]) - 1):
     lat1 = fileObject["features"][i]["geometry"]["coordinates"][1]
     lon1 = fileObject["features"][i]["geometry"]["coordinates"][0]
@@ -105,6 +112,7 @@ for i in range(len(fileObject["features"]) - 1):
                     setData(fileObject["features"][i]["properties"]["routeNameE"], "layer")
                 )
 
+# Output
 subfolder = "output"
 filename = "map.html"
 full_path = os.path.join(subfolder, filename)

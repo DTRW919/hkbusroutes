@@ -1,32 +1,27 @@
 import json
 
-def remove_tags_from_json(input_file, output_file, tags_to_remove):
-    # Read the JSON file
-    with open(input_file, 'r') as f:
+def removeTags(inputFile, outputFile, tags):
+    with open(inputFile, "r") as f:
         data = json.load(f)
 
-    # Recursive function to remove tags from nested structures
+    # Recursive function to search for tags
     def remove_tags(data):
         if isinstance(data, dict):
-            # Remove keys (tags) if they're in the list of tags to remove
-            return {key: remove_tags(value) for key, value in data.items() if key not in tags_to_remove}
+            return {key: remove_tags(value) for key, value in data.items() if key not in tags}
         elif isinstance(data, list):
-            # Process list elements (recursive)
             return [remove_tags(item) for item in data]
         else:
-            # Base case: just return the data
             return data
 
-    # Remove the specified tags from the data
     modified_data = remove_tags(data)
 
-    # Write the modified data back to a new file with proper indentation
-    with open(output_file, 'w') as f:
+    with open(outputFile, "w") as f:
         json.dump(modified_data, f, indent=2)
 
+# Actual usage; Put all unused tags in 'tags':
+tags = ["hyperlinkC", "hyperlinkS", "locEndNameC", "hyperlinkE", "locStartNameS", "locEndNameS", "stopNameS", "stopNameC", "locStartNameC", "routeNameC", "routeNameS", "fullFare", "serviceMode", "journeyTime"]
 
-# Example usage:
-tags_to_remove = ['hyperlinkC', 'hyperlinkS', 'locEndNameC', 'hyperlinkE', 'locStartNameS', 'locEndNameS', 'stopNameS', 'stopNameC', 'locStartNameC', 'routeNameC', 'routeNameS', 'fullFare', 'serviceMode', 'journeyTime']  # Specify the tags you want to remove
-input_file = 'base_.json' # _ is there to stop me from doing this accidentally
-output_file = 'output.json'
-remove_tags_from_json(input_file, output_file, tags_to_remove)
+inputFile = "base.json" # Base file
+outputFile = "output.json" # Final file
+
+removeTags(inputFile, outputFile, tags)
