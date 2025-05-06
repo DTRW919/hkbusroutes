@@ -5,6 +5,9 @@ Knowing the general location of bus routes across HK can help to narrow down whe
 
 This code is based off the free data provided by data.gov.hk's bus routes
 
+## Demo
+<img src="data/demo.png" style="text-align: center;" />
+
 ## Getting started
 This project uses Python and the Folium module to create an HTML map.
 
