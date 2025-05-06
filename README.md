@@ -20,12 +20,12 @@ git clone https://github.com/DTRW919/hkbusroutes.git
 $ pip install Folium
 ```
 
-3. Download the Dataset
+3. Download and Insert the Dataset
 
 You can find one [here](https://data.gov.hk/en-data/dataset/hk-td-tis_23-routes-fares-geojson).
-Place it in `data/`.
+Place it in `data/output.json`.
 
-4. Run the file
+4. Run the create file
 
 ```bash
 python createMap.py
