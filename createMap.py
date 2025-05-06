@@ -2,22 +2,31 @@ import folium, json, os
 
 map = folium.Map(
     prefer_canvas = True,
-    tiles = "Cartodb Voyager",
-    zoom_start = 12,
-    min_zoom = 11,
+    tiles = None,
+    zoom_start = 11,
     location = [22.345064, 114.190009]
     )
 
-route1 = folium.FeatureGroup(name = "1", show = False).add_to(map)
-route2 = folium.FeatureGroup(name = "2", show = False).add_to(map)
-route3 = folium.FeatureGroup(name = "3", show = False).add_to(map)
-route4 = folium.FeatureGroup(name = "4", show = False).add_to(map)
-route5 = folium.FeatureGroup(name = "5", show = False).add_to(map)
-route6 = folium.FeatureGroup(name = "6", show = False).add_to(map)
-route7 = folium.FeatureGroup(name = "7", show = False).add_to(map)
-route8 = folium.FeatureGroup(name = "8", show = False).add_to(map)
-route9 = folium.FeatureGroup(name = "9", show = False).add_to(map)
+route1 = folium.FeatureGroup(name = "1x", show = False).add_to(map)
+route2 = folium.FeatureGroup(name = "2x", show = False).add_to(map)
+route3 = folium.FeatureGroup(name = "3x", show = False).add_to(map)
+route4 = folium.FeatureGroup(name = "4x", show = False).add_to(map)
+route5 = folium.FeatureGroup(name = "5x", show = False).add_to(map)
+route6 = folium.FeatureGroup(name = "6x", show = False).add_to(map)
+route7 = folium.FeatureGroup(name = "7x", show = False).add_to(map)
+route8 = folium.FeatureGroup(name = "8x", show = False).add_to(map)
+route9 = folium.FeatureGroup(name = "9x", show = False).add_to(map)
 routeX = folium.FeatureGroup(name = "Other", show = False).add_to(map)
+
+tileLayer = folium.TileLayer(
+    tiles = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+    attr = "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors &copy; <a href='https://carto.com/attributions'>CARTO</a>",
+    min_zoom = 11,
+    max_zoom = 16,
+    name = "Cartodb Voyager",
+    control = False # Remove from Layer Control
+)
+tileLayer.add_to(map)
 
 folium.LayerControl().add_to(map)
 
