@@ -109,10 +109,8 @@ def setData(name, type):
 
 # Actual usage
 for i in range(len(fileObject["features"]) - 1):
-    lat1 = fileObject["features"][i]["geometry"]["coordinates"][1]
-    lon1 = fileObject["features"][i]["geometry"]["coordinates"][0]
-    lat2 = fileObject["features"][i + 1]["geometry"]["coordinates"][1]
-    lon2 = fileObject["features"][i + 1]["geometry"]["coordinates"][0]
+    lon1, lat1 = fileObject["features"][i]["geometry"]["coordinates"]
+    lon2, lat2 = fileObject["features"][i + 1]["geometry"]["coordinates"]
 
     if fileObject["features"][i]["properties"]["routeNameE"] == fileObject["features"][i + 1]["properties"]["routeNameE"]:
         if abs(lat2 - lat1) <= 0.05 and abs(lon2 - lon1) <= 0.05:
